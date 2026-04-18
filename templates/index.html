@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PC Builder</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+        }
+        header {
+            background: #222;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            height: 70vh;
+        }
+        .left {
+            width: 30%;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+        .right {
+            width: 70%;
+            padding: 20px;
+        }
+        .logs {
+            height: 20vh;
+            border-top: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>PC Builder Tool</h2>
+</header>
+
+<form method="POST">
+
+<div class="container">
+
+    <!-- LEFT PANEL -->
+    <div class="left">
+
+        <h3>Platform</h3>
+        <label><input type="radio" name="platform" value="auto" checked> Auto</label><br>
+        <label><input type="radio" name="platform" value="amd"> AMD</label><br>
+        <label><input type="radio" name="platform" value="intel"> Intel</label>
+
+        <h3>Budget</h3>
+        <input type="number" name="budget" placeholder="Enter budget (lei)" required>
+
+        <h3>Stores</h3>
+        <label><input type="checkbox" name="stores" value="emag"> eMAG</label><br>
+        <label><input type="checkbox" name="stores" value="pcgarage"> PC Garage</label><br>
+        <label><input type="checkbox" name="stores" value="evomag"> evoMAG</label>
+
+        <h3>Components</h3>
+        <label><input type="checkbox" name="components" value="cpu"> CPU</label><br>
+        <label><input type="checkbox" name="components" value="gpu"> GPU</label><br>
+        <label><input type="checkbox" name="components" value="ram"> RAM</label><br>
+        <label><input type="checkbox" name="components" value="motherboard"> Motherboard</label><br>
+        <label><input type="checkbox" name="components" value="storage"> Storage</label><br>
+        <label><input type="checkbox" name="components" value="psu"> PSU</label><br>
+        <label><input type="checkbox" name="components" value="cooling"> Cooling</label><br>
+        <label><input type="checkbox" name="components" value="case"> Case</label>
+
+        <button type="submit">Build PC</button>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+        <h3>Results</h3>
+
+        {% if results %}
+            <ul>
+                {% for key, value in results.items() %}
+                    <li>{{ key }} → {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results yet</p>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- LOGS -->
+<div class="logs">
+    <h4>Logs</h4>
+
+    {% if logs %}
+        <ul>
+            {% for log in logs %}
+                <li>{{ log }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No logs yet</p>
+    {% endif %}
+</div>
+
+</form>
+
+</body>
+</html>
